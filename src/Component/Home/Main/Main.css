@@ -1,0 +1,25 @@
+.from {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid black;
+  height: 40px;
+  width: 260px;
+}
+.line1 {
+  height: 100px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.line2 {
+  display: flex;
+}
+.line2 select {
+  width: 100px;
+  margin-right: 30px;
+}
+.line2_1 {
+  margin-left: 30px;
+}
