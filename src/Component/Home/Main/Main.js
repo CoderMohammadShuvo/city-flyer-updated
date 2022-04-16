@@ -124,6 +124,8 @@ export default function Main() {
   };
 
   return (
+
+    
     <>
       <Navbar />
 
@@ -160,7 +162,7 @@ export default function Main() {
                 />
               </div>
               <div className="line1_1">
-                <label htmlFor="">From</label>
+                <label htmlFor="">Departure date</label>
                 <br />
                 <input
                   type="date"
@@ -171,7 +173,7 @@ export default function Main() {
                 />
               </div>
               <div className="line1_1">
-                <label htmlFor="">From</label>
+                <label htmlFor="">Returning date</label>
                 <br />
                 <input
                   type="date"
@@ -240,7 +242,7 @@ export default function Main() {
                   console.log(from);
                   console.log(to);
                   console.log(firstDate);
-                  console.log(secondDate.substring(8, 10));
+                  
 
                   var event = document.getElementById("adult");
                   const adultValue =
@@ -248,25 +250,48 @@ export default function Main() {
                   setAdultAmount(adultValue);
                   console.log(adultAmount);
 
+
+           
+                //   axios({
+                //     method: "post",
+                //     url: "http://api.sandbox.flyhub.com/api/v1/Authenticate",
+                //     data: {
+                //       "username": "thecityflyers@gmail.com",
+                //       "apikey": "HSPOiK=~k2kwO73bXpSb_rNl=w9T1N7odIFnZmlvznn0H~5WRS"
+                      
+                //     },
+                    
+                    
+                //   }).then((response) => {
+                //     console.log(response)
+                //   }, (error) => {
+                //     console.log(error)
+                //   });
+                // }}
+
+
                   axios({
                     method: "post",
                     url: "http://api.sandbox.flyhub.com/api/v1/AirSearch",
-                    data: {
-                      AdultQuantity: adultAmount,
-                      ChildQuantity: 0,
-                      InfantQuantity: 0,
-                      EndUserIp: "192.168.1.1",
-                      JourneyType: "1",
-                      Segments: [
-                        {
-                          Origin: from,
-                          Destination: to,
-                          CabinClass: "1",
-                          DepartureDateTime: firstDate,
-                        },
-                      ],
+                    data: 
+                    {
+                    "AdultQuantity":1,
+                    "ChildQuantity":0,
+                    "InfantQuantity":0,
+                    "EndUserIp":"192.168.1.1",
+                    "JourneyType":"1",
+                    "Segments":[{
+                    "Origin":"DAC",
+                    "Destination":"JSR",
+                    "CabinClass":"Economy",
+                    "DepartureDateTime":"2022-5-04"
+                    }]
                     },
-                    headers: { Authorization: "Bearer ..." },
+                    headers: { Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InRoZWNpdHlmbHllcnNAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy91c2VyZGF0YSI6Ijk1fDExMXwxMDMuMTI0LjI1MS44NSIsIm5iZiI6MTY0OTkyNzYwMCwiZXhwIjoxNjUwNTMyNDAwLCJpYXQiOjE2NDk5Mjc2MDAsImlzcyI6Imh0dHA6Ly9hcGkuc2FuZGJveC5mbHlodWIuY29tIiwiYXVkIjoiYXBpLnNhbmRib3guZmx5aHViLmNvbSJ9.Li5sMliYVh_dS9UyzRFp97JSsi9nKqZ6dXO2t7ysx5k" },
+                  }).then((response) => {
+                    console.log(response);
+                  }, (error) => {
+                    console.log(error);
                   });
                 }}
               />
