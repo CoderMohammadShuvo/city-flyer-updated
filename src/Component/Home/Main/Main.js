@@ -21,6 +21,7 @@ import NativePickers from "./Date";
 import "./Main.css";
 import Navbar from "../Navbar/Navbar";
 import Route from "../../../assets/route.svg";
+import Searchpage from "../../pages/SearchPage";
 
 const blue = {
   50: "#F0F7FF",
@@ -240,7 +241,6 @@ export default function Main() {
                   console.log(from);
                   console.log(to);
                   console.log(firstDate);
-                  console.log(secondDate.substring(8, 10));
 
                   var event = document.getElementById("adult");
                   const adultValue =
@@ -252,22 +252,32 @@ export default function Main() {
                     method: "post",
                     url: "http://api.sandbox.flyhub.com/api/v1/AirSearch",
                     data: {
-                      AdultQuantity: adultAmount,
+                      AdultQuantity: 1,
                       ChildQuantity: 0,
                       InfantQuantity: 0,
                       EndUserIp: "192.168.1.1",
                       JourneyType: "1",
                       Segments: [
                         {
-                          Origin: from,
-                          Destination: to,
-                          CabinClass: "1",
-                          DepartureDateTime: firstDate,
+                          Origin: "DAC",
+                          Destination: "JSR",
+                          CabinClass: "Economy",
+                          DepartureDateTime: "2022-5-04",
                         },
                       ],
                     },
-                    headers: { Authorization: "Bearer ..." },
-                  });
+                    headers: {
+                      Authorization:
+                        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InRoZWNpdHlmbHllcnNAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy91c2VyZGF0YSI6Ijk1fDExMXwxMDMuMTI0LjI1MS44NSIsIm5iZiI6MTY0OTkyNzYwMCwiZXhwIjoxNjUwNTMyNDAwLCJpYXQiOjE2NDk5Mjc2MDAsImlzcyI6Imh0dHA6Ly9hcGkuc2FuZGJveC5mbHlodWIuY29tIiwiYXVkIjoiYXBpLnNhbmRib3guZmx5aHViLmNvbSJ9.Li5sMliYVh_dS9UyzRFp97JSsi9nKqZ6dXO2t7ysx5k",
+                    },
+                  }).then(
+                    (response) => {
+                      response.map(<Searchpage response={response} />);
+                    },
+                    (error) => {
+                      console.log(error);
+                    }
+                  );
                 }}
               />
             </div>
